@@ -5,5 +5,5 @@ el cálculo de las distancias de la geometría de la mano donde da como resultad
 no se ejecuta por falta de escáner, o si no detecta una mano derecha en la captura),
 también puede dar un valor de 2 si la mano detectada no coincide con el usuario habitual, con una cardinalidad igual a 3. Este challenge
 tiene una fiabilidad media porque el usuario malicioso puede tener las dimenciones de su mano similar al usuario habitual y 
-es difícil que tenga una imagen de la mano derecha del usuario habitula escaneada para engañar al challenge. 
+es difícil que tenga una imagen de la mano derecha del usuario habitual escaneada para engañar al challenge. 
 
