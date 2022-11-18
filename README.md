@@ -1,5 +1,5 @@
 # ChallengeMM_Reco_Mano
-# DESCRIPCION y FIABILIDAD
+  # DESCRIPCION y FIABILIDAD
 Reco_Mano es un challenge que comprueba si el usuario es un usuario habitual (empleado de la empresa), lo hace mediante
 el cálculo de las distancias de la geometría de la mano donde da como resultado 1 si es un usuario habitual, sino puede dar valores de 0 (si el challenge 
 no se ejecuta por falta de escáner, o si no detecta una mano derecha en la captura),
