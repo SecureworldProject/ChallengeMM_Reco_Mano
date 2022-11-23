@@ -1,25 +1,12 @@
 # ChallengeMM_Reco_Mano
   # DESCRIPCION y FIABILIDAD
-Reco_Mano es un challenge que comprueba si el usuario es un usuario habitual (empleado de la empresa), lo hace mediante
-el cálculo de las distancias de la geometría de la mano donde da como resultado 1 si es un usuario habitual, sino puede dar valores de 0 (si el challenge 
-no se ejecuta por falta de escáner, o si no detecta una mano derecha en la captura),
-también puede dar un valor de 2 si la mano detectada no coincide con el usuario habitual, con una cardinalidad igual a 3. Este challenge
-tiene una fiabilidad media porque el usuario malicioso puede tener las dimenciones de su mano similar al usuario habitual y 
-es difícil que tenga una imagen de la mano derecha del usuario habitual escaneada para engañar al challenge. 
+Reco_Mano es un challenge que comprueba si el usuario es un usuario habitual (empleado de la empresa), lo hace mediante el cálculo de las distancias de la geometría de la mano donde da como resultado 1 si es un usuario habitual, sino puede dar valores de 0 (si el challenge no se ejecuta por falta de escáner, o si no detecta una mano derecha en la captura), también puede dar un valor de 2 si la mano detectada no coincide con el usuario habitual, con una cardinalidad igual a 3. Este challenge tiene una fiabilidad media porque el usuario malicioso puede tener las dimenciones de su mano similar al usuario habitual y es difícil que tenga una imagen de la mano derecha del usuario habitual escaneada para engañar al challenge. 
 
 # FUNCIONAMIENTO:
-Este challenge requiere un proceso inicial de recopilación de datos, esto se hace con el archivo CrearBD_Manos.py, donde se le pide  
-al usuario que guarde 5 imagenes de su mano derecha escaneada, en la ubicación de la variable de entorno SECUREMIRROR_CAPTURES, luego
-se calcula la media de las distancias entre los puntos situados en los dedos y la palma de la mano (mediante la librería mediapipe de python), 
-obtenidas de las 5 imagenes almacenadas. Posteriormente se crea el fichero datos.csv con las medias de las distancias de los puntos obtenida.
+Este challenge requiere un proceso inicial de recopilación de datos, esto se hace con el archivo CrearBD_Manos.py, donde se le pide  al usuario que guarde 5 imágenes de su mano derecha escaneada, en la ubicación de la variable de entorno SECUREMIRROR_CAPTURES, luego se calcula la media de las distancias entre los puntos situados en los dedos y la palma de la mano (mediante la librería mediapipe de python), obtenidas de las 5 imágenes almacenadas. Posteriormente se crea el fichero datos.csv con las medias de las distancias de los puntos obtenidas.
+El challenge se encuentra en el fichero Reco_Manos.py donde se pide al usuario que se escanee la mano derecha y la almacene en una ubicación determinada, dentro de la ruta de la variable de entorno SECUREMIRROR_CAPTURES. Importante: La imagen almacenada en dicha ubicación se eliminará automáticamente una vez que se ejecute el challenge para garantizar que el usuario haga la operación cada vez que necesite ejecutarlo, disminuyendo así el riesgo de plagio de la imagen.
+Una vez que la imagen se encuentra en la ubicación, se calculan las distancias y error medio cuadrático (RMSE) entre las distancias de la imagen y las medias almacenadas. Si el RMSE es mayor que un umbral (14 para las pruebas realizadas) el usuario no es el usuario habitual y el challenge retornará un 2, si por el contrario es el usuario  habitual retornará un 1 y si el challenge no se puede ejecutar por cualquier motivo, este retornará un 0. La clave resultante está desde 0 hasta 2,  siendo 1 el valor correcto. Con una cardinalidad igual a 3.
 
-El challenge se encuentra en el fichero Reco_Manos.py donde se pide al usuario que se escanee la mano derecha y la amacene en una ubicación determinada, dentro
-de la ruta de la variable de entorno SECUREMIRROR_CAPTURES. Importante: La imagen almacenada en dicha ubicación se eliminará automáticamente una vez que se 
-ejecute el challenge para garantizar que el usuario haga la operación cada vez que necesite ejecutarlo, disminuyendo así el riezgo de plagio de la imagen.
-Una vez que la imagen se encuentra en la ubicación, se calculan las distancias y error mediao cuadrático (RMSE) entre las distancias de la imagen y las medias almacenadas.
-Si el RMSE es mayor que un umbral (14 para las pruebas realizadas) el usuario no es el usuario habitual y el challenge retornará un 2, si por el contrario es el usuario 
-habitual retornará un 1 y si el challenge no se puede ejecutar por cualquier motivo, este retornará un 0. La clave resultante está desde 0 hasta 2, 
-siendo 1 el valor correcto. Con una cardinalidad igual a 3.
 
 # Requisitos:
 Instalar el framework MediaPipe https://mediapipe.dev/, actualmente disponible hasta la versión 3.10.8. 
