@@ -9,33 +9,16 @@ Una vez que la imagen se encuentra en la ubicación, se calculan las distancias 
 
 
 # Requisitos:
-Instalar el framework MediaPipe https://mediapipe.dev/, actualmente disponible hasta la versión 3.10.8. 
-Hacer fotos escaneadas de la mano derecha en el escáner que utilizará habitualmente para tomar la imagen a comparar. 
-
 La variable de entorno SECUREMIRROR_CAPTURES debe existir y apuntar al path donde el server bluetooth deposita las capturas.
+Importante: Instalar el framework MediaPipe https://mediapipe.dev/, actualmente disponible hasta la versión 3.10.8. 
+Importante: Hacer fotos escaneadas de la mano derecha en el escáner que utiliza habitualmente para tomar la imagen a comparar. 
 
-Librerías utilizadas:
-Mediapipe para los modelos de detección de manos y ubicación de los puntos de interés (mp.solutions.HANDS y handlandmarks).
+#Librerías utilizadas: 
 
-para instalar mediapipe simplmente: pip install mediapipe
-
-Opencv para la entrada de las imagen y configuración de sus dimenciones.    
-https://www.geeksforgeeks.org/opencv-python-tutorial
-
-para instalar la libreria openCV simplemente: (la librería mediapipe también intala opencv):
-
-pip install opencv-python
-
-IMPORTANTE Si se muestra el  error: AttributeError: module 'cv2' has no attribute 'face' hacer lo siguiente:
-pip install opencv-contrib-python
-
-IMPORTANTE: tras instalar opencv, la dll python3.dll de instalacion de python cambia, debes darle acceso al programa que haga uso de este challenge ubicandola en un directorio al que pueda acceder
-
-para aprender opencv https://www.geeksforgeeks.org/opencv-python-tutorial
-
-Tkinter para las GUI 
-para instalar el modulo tkinter simplemente:
-
-pip install tkinter
-
-para aprender tkinter: https://www.pythontutorial.net/tkinter/
+Mediapipe para los modelos de detección de manos y ubicación de los puntos de interés (mp.solutions.HANDS y handlandmarks). para instalar mediapipe simplmente: pip install mediapipe
+Opencv para la entrada de las imagen y configuración de sus dimensiones  (la librería mediapipe también instala opencv): https://www.geeksforgeeks.org/opencv-python-tutorial
+ 
+ 
+Importante:Tras instalar opencv, la dll python3.dll de instalación de python cambia, debes darle acceso al programa que haga uso de este challenge ubicándola en un directorio al que pueda acceder. Para aprender opencv https://www.geeksforgeeks.org/opencv-python-tutorial 
+Tkinter para las GUI de interacción con el usuario. Para instalar el módulo tkinter simplemente: pip install tkinter. Para aprender tkinter: https://www.pythontutorial.net/tkinter/ . Para instalar el módulo tkinter simplemente: pip install tkinter 
+os para crear directorios y listar archivos. https://docs.python.org/es/3.10/library/os.html
