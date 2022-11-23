@@ -108,7 +108,7 @@ def dist_Hands (fileName,nameDir):
                         dis10= calcularDistancia(x10,y10,x0,y0)
                         dis101= calcularDistancia(x101,y101,x0,y0)
                         print('dis101:', dis101)
-                        # Dibujando los puntos de interÈs
+                        # Dibujando los puntos de inter√©s
                         cv2.circle(image, (x0, y0), 3,(255,0,0),3)
                         cv2.circle(image, (x6, y6), 3,(255,0,0),3)
                         cv2.circle(image, (x61, y61), 3,(255,0,0),3)
@@ -153,7 +153,7 @@ if (ca=="no"):
     ventana= tk.Tk()
     ventana.geometry('450x100')
     tk.Label(ventana,text='Necesita un escaner para crear la base de datos ', font = "Calibri 16").pack()
-    #BotÛn para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+    #Bot√≥n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
     button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
     ventana.mainloop()
 
@@ -175,13 +175,13 @@ else:
         print (personName)
         return (personName)
 
-    #BotÛn para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+    #Bot√≥n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
     button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
     ventana.mainloop()
     
     #Se crea una carpeta con el nombre del usuario a reconocer, 
-    #esta se crear· dentro de la carpeta Data que ya se habÌa creado previamente de forma manual. 
-    # Finalmente personPath ser· la ruta completa.
+    #esta se crear√° dentro de la carpeta Data que ya se hab√≠a creado previamente de forma manual. 
+    # Finalmente personPath ser√° la ruta completa.
 
     d_Path=os.environ['SECUREMIRROR_CAPTURES']
     dataPath = d_Path + '/' + 'DB_Manos' #Cambia a la ruta donde hayas almacenado Data
@@ -203,8 +203,8 @@ else:
 
     ventana= tk.Tk()
     ventana.geometry('650x150')
-    tk.Label(ventana,text='Antes de pulsar OK guarde 5 imagenes escaneadas de la palma \n de tu mano derecha con diferentes posiciones en la ruta: \n ' + personPath, font = "Calibri 16").pack()
-    #BotÛn para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+    tk.Label(ventana,text='Antes de pulsar OK guarde 5 imagenes escaneadas de la palma \n de tu mano derecha con diferentes posiciones en la carpeta \n con tu nombre creada en la ruta: ' + personPath, font = "Calibri 16").pack()
+    #Bot√≥n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
     button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
     ventana.mainloop()
 
@@ -237,7 +237,7 @@ else:
                   ,'Mean_Dist 2-0': [(np.mean (resul[0][10]))]}
 
     print (pd.DataFrame(data))
-    # CreaciÛn DataFrame:
+    # Creaci√≥n DataFrame:
     tab_result = pd.DataFrame(data)
 
     # Guarda datos en CSV:
