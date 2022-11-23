@@ -1,18 +1,14 @@
 
 # -*- coding: latin-1 -*-
-#from this import s
-from fileinput import filename
-from pickle import TRUE
 import cv2
 import mediapipe as mp
 import numpy as np
-import numpy as mean
 from math import sqrt
 import pandas as pd
 import os
 import tkinter as tk
 from tkinter import messagebox
-import csv
+
 
 
 def calcularDistancia (x1,y1,x2,y2): 
@@ -150,7 +146,7 @@ def dist_Hands (fileName,nameDir):
 def cerrar():
     ventana.destroy()
 
-ca=messagebox.askquestion(title= "Calculando datos de manos ", message="Tines escaner para obtener imagenes de las manos")
+ca=messagebox.askquestion(title= "Calculando datos de manos ", message="Tines escaner vinculado al PC para obtener imagenes de las manos")
 print (ca)
     
 if (ca=="no"):
@@ -195,15 +191,6 @@ else:
         print('Carpeta creada: ',personPath)
         os.makedirs(personPath)
 
-
-    
-    '''d_Path=os.environ['SECUREMIRROR_CAPTURES']
-    print (d_Path)
-    dataPath = d_Path + '/' + 'DB_Manos' #Cambia a la ruta donde hayas almacenado Data
-    with os.scandir(dataPath) as ficheros:
-         personPath = [fichero.name for fichero in ficheros if fichero.is_dir()]
- 
-    print('Nombre carpeta: ',personPath)'''
 
     peopleList = os.listdir(dataPath)
     print('Lista de personas: ', peopleList)

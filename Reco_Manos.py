@@ -1,13 +1,9 @@
 
 # -*- coding: latin-1 -*-
-#from this import s
-from fileinput import filename
-from pickle import TRUE
-from unittest import result
+
 import cv2
 import mediapipe as mp
 import numpy as np
-import numpy as mean
 from math import sqrt
 import pandas as pd
 import os
@@ -15,12 +11,8 @@ from os import remove
 from os import path
 import tkinter as tk
 from tkinter import messagebox
-import csv
 import lock
 
-#para instalar el modulo tkinter simplemente:
-#pip3 install tkinter
-# o bien py -m pip install tkinter
 
 # variables globales
 # ------------------
@@ -57,7 +49,7 @@ def executeChallenge():
     def cerrar():
         ventana.destroy()
 
-    ca=messagebox.askquestion(title= "Reco_Manos", message="Tines escaner para obtener una imagen de tu mano derecha")
+    ca=messagebox.askquestion(title= "Reco_Manos", message="Tines escaner vinculado al PC para obtener una imagen de tu mano derecha")
     print (ca)
     
     if (ca=="no"):
@@ -199,7 +191,7 @@ def executeChallenge():
                             rmse= sqrt((((tab_result.iloc[0, 1]-df.iloc[0, 1])**2)+((tab_result.iloc[0, 2]-df.iloc[0, 2])**2)+((tab_result.iloc[0, 3]-df.iloc[0, 3])**2)+((tab_result.iloc[0, 4]-df.iloc[0, 4])**2)+((tab_result.iloc[0, 5]-df.iloc[0, 5])**2)+((tab_result.iloc[0, 6]-df.iloc[0, 6])**2)+((tab_result.iloc[0, 7]-df.iloc[0, 7])**2)+((tab_result.iloc[0, 8]-df.iloc[0, 8])**2)+((tab_result.iloc[0, 9]-df.iloc[0, 9])**2)+((tab_result.iloc[0, 10]-df.iloc[0, 10])**2))/10)
                             
                             #Eliminando imagen de la carpeta MANO para que el usuario tenga que guardarla cada vez que se ejecute el challenge
-                            remove(dataPath + "/" + fileName)
+                            #remove(dataPath + "/" + fileName)
                 image = cv2.flip(image, 1)
                 cv2.imshow("Image",image)
                 cv2.waitKey(0)
@@ -223,15 +215,31 @@ def executeChallenge():
    #Creando respuesta
     print(rmse)
     if rmse<0:
-        print("Es menor que 0:")
         resp=0
     elif rmse >= 0 and rmse <= 14:
-        print("Es:", df.iloc[0, 0])
         resp=1
-    elif rmse > 14:
-        print("NO Es:", df.iloc[0, 0])
+    elif rmse > 14 and rmse <= 20:
         resp=2 
-
+    elif rmse > 20 and rmse <= 25:
+        resp=3
+    elif rmse > 25 and rmse <= 30:
+        resp=4
+    elif rmse > 30 and rmse <= 35:
+        resp=5
+    elif rmse > 35 and rmse <= 40:
+        resp=6    
+    elif rmse > 40 and rmse <= 45:
+        resp=7
+    elif rmse > 45 and rmse <= 50:
+        resp=8
+    elif rmse > 50 and rmse <= 55:
+        resp=9
+    elif rmse > 55 and rmse <= 60:
+        resp=10
+    elif rmse > 60 and rmse <= 65:
+        resp=11
+    elif rmse > 65:
+        resp=12   
     
     #mecanismo de lock END
     #-----------------------
