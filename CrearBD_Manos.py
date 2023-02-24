@@ -90,8 +90,7 @@ def dist_Hands (fileName,nameDir):
 
                         dis6= calcularDistancia(x6,y6,x0,y0)
                         dis61= calcularDistancia(x61,y61,x0,y0)
-                        print('dis6:', dis6)
-                
+                                        
 
                         dis7= calcularDistancia(x7,y7,x0,y0)
                         dis71= calcularDistancia(x71,y71,x0,y0)
@@ -107,7 +106,7 @@ def dist_Hands (fileName,nameDir):
 
                         dis10= calcularDistancia(x10,y10,x0,y0)
                         dis101= calcularDistancia(x101,y101,x0,y0)
-                        print('dis101:', dis101)
+                         
                         # Dibujando los puntos de interés
                         cv2.circle(image, (x0, y0), 3,(255,0,0),3)
                         cv2.circle(image, (x6, y6), 3,(255,0,0),3)
@@ -121,20 +120,9 @@ def dist_Hands (fileName,nameDir):
                         cv2.circle(image, (x10, y10), 3,(255,0,0),3)
                         cv2.circle(image, (x101, y101), 3,(255,0,0),3)
              
-                    lis_nomb.append(nameDir)   
-                    lis_Dis6.append(dis6)
-                    print('lis_Dis6:', lis_Dis6)
-                    lis_Dis61.append(dis61)
-                    lis_Dis7.append(dis7)
-                    lis_Dis71.append(dis71)
-                    lis_Dis8.append(dis8)
-                    lis_Dis81.append(dis81)
-                    lis_Dis9.append(dis9)
-                    lis_Dis91.append(dis91)
-                    lis_Dis10.append(dis10)
-                    lis_Dis101.append(dis101)
-                    Resultados=[lis_nomb,lis_Dis6,lis_Dis61,lis_Dis7,lis_Dis71,lis_Dis8,lis_Dis81,lis_Dis9,lis_Dis91,lis_Dis10,lis_Dis101]
-                    print('Resultados: ', Resultados)
+                    
+                    Resultados=[nameDir,dis6,dis61,dis7,dis71,dis8,dis81,dis9,dis91,dis10,dis101]
+                    #print('Resultados: ', Resultados)
 
                     
         image = cv2.flip(image, 1)
@@ -172,7 +160,7 @@ else:
     # para crear la carpeta de imagenes para entrenar el modelo
     def obtTex():
         personName = str(nombre.get())
-        print (personName)
+        #print (personName)
         return (personName)
 
     #Botón para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
@@ -199,46 +187,80 @@ else:
     handsData = []
     label = 0
 
-    resul=[]
+    resultados=[]
 
     ventana= tk.Tk()
     ventana.geometry('650x150')
-    tk.Label(ventana,text='Antes de pulsar OK guarde 5 imagenes escaneadas de la palma \n de tu mano derecha con diferentes posiciones en la carpeta \n con tu nombre creada en la ruta: ' + personPath, font = "Calibri 16").pack()
+    tk.Label(ventana,text='Antes de pulsar OK guarde 3 imagenes escaneadas de la palma \n de tu mano derecha en la carpeta \n con tu nombre creada en la ruta: ' + personPath, font = "Calibri 16").pack()
     #Botón para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
     button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
     ventana.mainloop()
 
 
-    for nameDir in peopleList:
-        personPath = dataPath + '/' + nameDir
-        #print('Leyendo las imagenes')
+for nameDir in peopleList:
+    personPath = dataPath + '/' + nameDir
+    #print('Leyendo las imagenes')
 
-        for fileName in os.listdir(personPath):
-            labels.append(label)
-            handsData.append(cv2.imread(personPath+'/'+fileName,0))
-            image = cv2.imread(personPath+'/'+fileName,0)
-            resul.append(dist_Hands (fileName,nameDir))
-            #print ("dist_Hands (fileName): ",distancias)
+    for fileName in os.listdir(personPath):
+        labels.append(label)
+        handsData.append(cv2.imread(personPath+'/'+fileName,0))
+        image = cv2.imread(personPath+'/'+fileName,0)
+        resultados.append(dist_Hands (fileName,nameDir))
+        #print("result=",resultados)
+        #print ("dist_Hands (fileName): ",distancias)
 
-            label = label + 1 
+    label = label + 1 
 
-    print("nameDir",nameDir)
+#print("resultados[0][1]",resultados[0][1])
 
-    data= {'Nombre': [nameDir]
-                  , 'Mean_Dist 20-0': [(np.mean (resul[0][1]))]
-                  , 'Mean_Dist 17-0': [(np.mean (resul[0][2]))]
-                  , 'Mean_Dist 16-0': [(np.mean (resul[0][3]))]
-                  ,'Mean_Dist 13-0': [(np.mean (resul[0][4]))]
-                  ,'Mean_Dist 12-0': [(np.mean (resul[0][5]))]
-                  ,'Mean_Dist 9-0': [(np.mean (resul[0][6]))]
-                  ,'Mean_Dist 8-0': [(np.mean (resul[0][7]))]
-                  ,'Mean_Dist 5-0': [(np.mean (resul[0][8]))]
-                  ,'Mean_Dist 4-0': [(np.mean (resul[0][9]))]
-                  ,'Mean_Dist 2-0': [(np.mean (resul[0][10]))]}
+dat=[]
 
-    print (pd.DataFrame(data))
-    # Creación DataFrame:
-    tab_result = pd.DataFrame(data)
+for i in  range(1,11):
+    values=[]
+    for j in  range(0,3):
+        values.append(resultados[j][i])
+        #print("VALUES", values)
+    media= np.mean (values)
+    #print("MEDIA", media)
+    dat.append(media)
 
-    # Guarda datos en CSV:
-    tab_result.to_csv(d_Path + '/' + 'datos.csv', header=["NOMBRE","Mean_Dist 20-0", "Mean_Dist 17-0","Mean_Dist 16-0","Mean_Dist 13-0","Mean_Dist 12-0","Mean_Dist 9-0","Mean_Dist 8-0","Mean_Dist 5-0","Mean_Dist 4-0","Mean_Dist 2-0"], index=False)
+#print(dat)
+
+Umax= sqrt((((dat[0]-resultados[0][1])**2)+((dat[1]-resultados[0][2])**2)+((dat[2]-resultados[0][3])**2)+((dat[3]-resultados[0][4])**2)+((dat[4]-resultados[0][5])**2)+((dat[5]-resultados[0][6])**2)+((dat[6]-resultados[0][7])**2)+((dat[7]-resultados[0][8])**2)+((dat[8]-resultados[0][9])**2)+((dat[9]-resultados[0][10])**2))/10)
+#Umin= sqrt((((dat[0]-resultados[0][1])**2)+((dat[1]-resultados[0][2])**2)+((dat[2]-resultados[0][3])**2)+((dat[3]-resultados[0][4])**2)+((dat[4]-resultados[0][5])**2)+((dat[5]-resultados[0][6])**2)+((dat[6]-resultados[0][7])**2)+((dat[7]-resultados[0][8])**2)+((dat[8]-resultados[0][9])**2)+((dat[9]-resultados[0][10])**2))/10)        
+
+#PARA CALCULAR UMBRALES
+
+for i in  range(0,3):
+    
+        rmse= sqrt((((dat[0]-resultados[i][1])**2)+((dat[1]-resultados[i][2])**2)+((dat[2]-resultados[i][3])**2)+((dat[3]-resultados[i][4])**2)+((dat[4]-resultados[i][5])**2)+((dat[5]-resultados[i][6])**2)+((dat[6]-resultados[i][7])**2)+((dat[7]-resultados[i][8])**2)+((dat[8]-resultados[i][9])**2)+((dat[9]-resultados[i][10])**2))/10)
+        #print("rmse",rmse)
+        if (Umax<rmse):
+            Umax=rmse
+            
+        
+           
+            
+print("Umax",Umax)
+
+
+
+data= {'Nombre': [nameDir]
+                  , 'Mean_Dist 20-0': dat[0]
+                  , 'Mean_Dist 17-0': dat[1]
+                  , 'Mean_Dist 16-0': dat[2]
+                  ,'Mean_Dist 13-0': dat[3]
+                  ,'Mean_Dist 12-0': dat[4]
+                  ,'Mean_Dist 9-0': dat[5]
+                  ,'Mean_Dist 8-0': dat[6]
+                  ,'Mean_Dist 5-0': dat[7]
+                  ,'Mean_Dist 4-0': dat[8]
+                  ,'Mean_Dist 2-0': dat[9]
+                  ,'Umax':int(Umax+1)}
+
+#print (pd.DataFrame(data))
+# Creación DataFrame:
+tab_result = pd.DataFrame(data)
+
+# Guarda datos en CSV:
+tab_result.to_csv(d_Path + '/' + 'datos.csv', header=["NOMBRE","Mean_Dist 20-0", "Mean_Dist 17-0","Mean_Dist 16-0","Mean_Dist 13-0","Mean_Dist 12-0","Mean_Dist 9-0","Mean_Dist 8-0","Mean_Dist 5-0","Mean_Dist 4-0","Mean_Dist 2-0","Umax"], index=False)

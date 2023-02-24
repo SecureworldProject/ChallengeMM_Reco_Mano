@@ -56,7 +56,7 @@ def executeChallenge():
         ventana= tk.Tk()
         ventana.geometry('450x100')
         tk.Label(ventana,text='Necesitas un escaner para comprobar la imagen', font = "Calibri 16").pack()
-        #BotÃ³n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+        #Botón para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
         button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
         ventana.mainloop()
         rmse=-1
@@ -69,14 +69,14 @@ def executeChallenge():
     
         ventana= tk.Tk()
         ventana.geometry('750x150')
-        tk.Label(ventana,text='Antes de pulsar OK crea una carpeta llamada:  MANO (si aÃºn no la has creado) \n en la ruta '  + d_Path + ' \n y guarde en ella una imagen escaneada de la palma de la mano derecha\n ', font = "Calibri 16").pack()
-        #BotÃ³n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+        tk.Label(ventana,text='Antes de pulsar OK crea una carpeta llamada:  MANO (si aún no la has creado) \n en la ruta '  + d_Path + ' \n y guarde en ella una imagen escaneada de la palma de la mano derecha\n ', font = "Calibri 16").pack()
+        #Botón para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
         button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
         ventana.mainloop()
 
         dataPath = d_Path + '/' + 'MANO' #Cambia a la ruta donde se almacene la imagen diaria
 
-        #comprobando que el directorio de la carpeta MANO no estÃ¡ vacio
+        #comprobando que el directorio de la carpeta MANO no está vacio
         direct = os.listdir(dataPath) 
         if len(direct) != 0: 
 
@@ -107,7 +107,7 @@ def executeChallenge():
                             ventana= tk.Tk()
                             ventana.geometry('450x100')
                             tk.Label(ventana,text='Entre una imagen de la mano derecha', font = "Calibri 16").pack()
-                            #BotÃ³n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+                            #Botón para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
                             button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
                             ventana.mainloop()
 
@@ -154,7 +154,7 @@ def executeChallenge():
                                 dis10= calcularDistancia(x10,y10,x0,y0)
                                 dis101= calcularDistancia(x101,y101,x0,y0)
                         
-                                # Dibujando los puntos de interÃ©s
+                                # Dibujando los puntos de interés
                                 cv2.circle(image, (x0, y0), 3,(255,0,0),3)
                                 cv2.circle(image, (x6, y6), 3,(255,0,0),3)
                                 cv2.circle(image, (x61, y61), 3,(255,0,0),3)
@@ -183,7 +183,7 @@ def executeChallenge():
                                         ,'Dist 2-0': [(resul[10])]}
 
                         
-                            # CreaciÃ³n DataFrame:
+                            # Creación DataFrame:
                             tab_result = pd.DataFrame(data)
                         
 
@@ -204,7 +204,7 @@ def executeChallenge():
             ventana= tk.Tk()
             ventana.geometry('850x100')
             tk.Label(ventana,text='Debes guardar una imagen de la palma de la mano derecha escaneada en una carpeta llamada: \n MANO en la ruta '  + d_Path + ' ', font = "Calibri 16").pack()
-            #BotÃ³n para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
+            #Botón para cerrar ventana una vez que el usuario introdujo su nombre y apellidos
             button1 = tk.Button(ventana, text = "OK", command = cerrar).pack(side= tk.BOTTOM)
             ventana.mainloop()
             rmse=-1
@@ -214,11 +214,12 @@ def executeChallenge():
     
    #Creando respuesta
     print(rmse)
+    print(df.iloc[0,11])
     if rmse<0:
         resp=0
-    elif rmse >= 0 and rmse <= 14:
+    elif rmse >= 0 and rmse <= df.iloc[0,11]:
         resp=1
-    elif rmse > 14 and rmse <= 20:
+    elif rmse > df.iloc[0,11] and rmse <= 20:
         resp=2 
     elif rmse > 20 and rmse <= 25:
         resp=3
