@@ -210,44 +210,35 @@ def executeChallenge():
             rmse=-1
 
     
+    # Get the mode from the properties dictionary (global variable)
+    mode = props_dict["mode"]    
+    
+   # Construcción de la respuesta
+    if mode == "parental":
+        if rmse >= 0 and rmse <= df.iloc[0,11]:   resp= 1
+        else: 
+                                                  resp= 0
         
+    else:   # Modo no parental 
+        print(rmse)
+        print(df.iloc[0,11]) 
+        if rmse<0:                                        resp=0
+        elif rmse >= 0 and rmse <= df.iloc[0,11]:         resp=1
+        elif rmse > df.iloc[0,11] and rmse <= 20:         resp=2 
+        elif rmse > 20 and rmse <= 25:                    resp=3
+        elif rmse > 25 and rmse <= 30:                    resp=4
+        elif rmse > 30 and rmse <= 35:                    resp=5
+        elif rmse > 35 and rmse <= 40:                    resp=6    
+        elif rmse > 40 and rmse <= 45:                    resp=7
+        elif rmse > 45 and rmse <= 50:                    resp=8
+        elif rmse > 50 and rmse <= 55:                    resp=9
+        elif rmse > 55 and rmse <= 60:                    resp=10
+        elif rmse > 60 and rmse <= 65:                    resp=11
+        elif rmse > 65:                                   resp=12   
     
-   #Creando respuesta
-    print(rmse)
-    print(df.iloc[0,11])
-    if rmse<0:
-        resp=0
-    elif rmse >= 0 and rmse <= df.iloc[0,11]:
-        resp=1
-    elif rmse > df.iloc[0,11] and rmse <= 20:
-        resp=2 
-    elif rmse > 20 and rmse <= 25:
-        resp=3
-    elif rmse > 25 and rmse <= 30:
-        resp=4
-    elif rmse > 30 and rmse <= 35:
-        resp=5
-    elif rmse > 35 and rmse <= 40:
-        resp=6    
-    elif rmse > 40 and rmse <= 45:
-        resp=7
-    elif rmse > 45 and rmse <= 50:
-        resp=8
-    elif rmse > 50 and rmse <= 55:
-        resp=9
-    elif rmse > 55 and rmse <= 60:
-        resp=10
-    elif rmse > 60 and rmse <= 65:
-        resp=11
-    elif rmse > 65:
-        resp=12   
     
-    #mecanismo de lock END
-    #-----------------------
-    lock.lockOUT("Reco_Manos")
 
 
-    #construccion de la respuesta
 
     cad="%d"%(resp)
     key = bytes(cad,'utf-8')
@@ -256,8 +247,11 @@ def executeChallenge():
     print ("result:",result)
     return result
     
+    #mecanismo de lock END
+    #-----------------------
+    lock.lockOUT("Reco_Manos")
 
 if __name__ == "__main__":
-    midict={}
+    midict={"mode": "normal"}
     print(init(midict))
     #executeChallenge()
